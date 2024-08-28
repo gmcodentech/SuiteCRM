@@ -416,8 +416,14 @@ class SugarFeedDashlet extends DashletGeneric
             $resortQueue[] = $normalMessage;
         }
 
-        $function = function ($a, $b) {
-            return $a["sort_key"] < $b["sort_key"];
+        $function = function ($a, $b) {			
+			if($a["sort_key"] == $b["sort_key"]) {
+				return 0;
+			} else if($a["sort_key"] < $b["sort_key"]) {
+				return 1;
+			} else {
+				return -1;
+			}
         };
 
         usort($resortQueue, $function);
